@@ -1,35 +1,39 @@
 ﻿--Create a database named "Manufacturer"
 
 create database Manufacturer
-on
-(
-Name=ManufacturerData1,
-FileName='C:\DATABASES\DATA\ManufacturerData1.mdf',
-size=10MB, --KB, MB,GB,TB
-maxsize=unlimited,
-filegrowth= 1GB
-)
-log on
-(
-Name=ManufacturerLog,
-FileName='C:\DATABASES\DATA\ManufacturerLog1.ldf',
-size=10MB, --KB, MB, GB,TB
-maxsize=unlimited,
-filegrowth= 1024MB
-)
+--on
+--(
+--Name=ManufacturerData1,
+--FileName='C:\DATABASES\DATA\ManufacturerData1.mdf',
+--size=10MB, --KB, MB,GB,TB
+--maxsize=unlimited,
+--filegrowth= 1GB
+--)
+--log on
+--(
+--Name=ManufacturerLog,
+--FileName='C:\DATABASES\DATA\ManufacturerLog1.ldf',
+--size=10MB, --KB, MB, GB,TB
+--maxsize=unlimited,
+--filegrowth= 1024MB
+--)
 
 --Create the tables inthe database.
 --Create keys (PKs, FKs etc).
-
+use Manufacturer
 create table Components
 ([compID] int primary key identity(1,1) not null,
+--or
+--[compID] int identity(1,1) not null,
+--PRIMARY KEY (compID)
 [comp_name] varchar(20) not null,
 [description] varchar(50)  not null 
-)
+);
 
 
-insert into dbo.[Components]
-([comp_name],[description])
+insert into dbo.[Components](
+[comp_name],
+[description])
 
 values
 ('car tire','125/45 R 16 86H'),
@@ -45,13 +49,13 @@ values
 ('rim','6.5X16 CAR 737 5X114.3 ET45 72.6 MBZ'),
 ('rim','7.5X17 CAR 737 5X114.3 ET45 72.6 MBZ');
 
-use Manufacturer
-select * from dbo.[Components]
+--use Manufacturer
+--select * from dbo.[Components]
 
-create table [Suppliers]
-([supplierID] int primary key identity(1,1) not null,
- varchar(20) not null
-)[supplier_name]
+create table [Suppliers](
+[supplierID] int primary key identity(1,1) not null,
+[supplier_name] varchar(20) not null
+);
 
 
 insert into dbo.[Suppliers]
@@ -64,13 +68,13 @@ values
 ('Garajmarketim'),
 ('bauhouse');
 
-select * from dbo.[Suppliers]
+--select * from dbo.[Suppliers]
 
 create table Products
 ([productID] int primary key identity(1,1) not null,
 [product_name] varchar(20) not null,
 [quantity] int not null 
-)
+);
 
 
 insert into dbo.[Products]
@@ -90,15 +94,19 @@ values
 ('Voswagen Golf',2),
 ('Voswagen Passat',4);
 
-use Manufacturer
-select * from dbo.[Products]
+--use Manufacturer
+--select * from dbo.[Products]
 
-create table Comp_Products
-([productID] int foreign key REFERENCES dbo.[Products]([productID]),
+create table Comp_Products (
+[productID] int foreign key REFERENCES dbo.[Products]([productID]),
 [compID] int foreign key REFERENCES dbo.[Components]([compID])
-)
-select * from Products
-select * from [Components]
+--CONSTRAINT fk1_productId FOREIGN KEY ([productID]) REFERENCES Products ([productID]),
+--CONSTRAINT fk2_componentId FOREIGN KEY ([compID]) REFERENCES Components ([compID]),
+--PRIMARY KEY ([productID], [compID]) 
+--([productID], [compID]) birlikte composite primary key olusturur.
+);
+--select * from Products
+--select * from [Components]
 
 insert into dbo.[Comp_Products]
 ([productID],[compID])
@@ -117,15 +125,20 @@ values
 (9,2),
 (4,10);
 
-use Manufacturer
-select * from dbo.[Comp_Products]
+--use Manufacturer
+--select * from dbo.[Comp_Products]
 
 create table Comp_Supplier
 ([compID] int foreign key REFERENCES dbo.[Components]([compID]),
 [supplierID] int foreign key REFERENCES dbo.[Suppliers]([supplierID]),
-)
-select * from Suppliers
-select * from [Components]
+--CONSTRAINT fk1_supplierID FOREIGN KEY ([supplierID]) REFERENCES  Suppliers ([supplierID]),
+--CONSTRAINT fk3_componentID FOREIGN KEY ([compID]) REFERENCES Components ([compID]),
+--PRIMARY KEY (supplierID, compID)
+--([supplierID], [compID]) birlikte composite primary key olusturur.
+);
+
+--select * from Suppliers
+--select * from [Components]
 
 insert into dbo.[Comp_Supplier]
 ([compID],[supplierID])
@@ -144,5 +157,5 @@ values
 (9,2),
 (8,3);
 
-use Manufacturer
-select * from dbo.[Comp_Supplier]
+--use Manufacturer
+--select * from dbo.[Comp_Supplier]
