@@ -3,7 +3,7 @@
 <img src="https://docs.google.com/uc?id=17CPCwi3_VvzcS87TOsh4_U8eExOhL6Ki" class="img-fluid" alt="CLRSWY" width="270" height="230"> 
 
 ***    
-This analysis was performed during the Analyzing Police Activity. The data set used is provided by the Stanford Open Policing Project and represents the traffic stops of police officers in the United States in the State of Rhode Island during the years 2005 - 2015. Each line in this data set represents the stop performed by a police officer from any vehicle driver.
+This analysis is related with Police Activity. The dataset used is provided by the Stanford Open Policing Project and represents the traffic stops of police officers in the United States in the State of Rhode Island during the years 2005 - 2015. Each line in this data set represents the stop performed by a police officer from any vehicle driver.
 
 The data analysis is then divided into three stages:
 
