@@ -1,0 +1,7 @@
+Install PostgreSQL and PgAdmin4: 
+https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+
+1-Create a Database named nation via MSSQL Server and PostgreSQL
+3-Draw ERD Diagram via drawio
+3-Create tables named continents, regions, countries, languages, country_languages, country_stats
+4-Insert data into the database

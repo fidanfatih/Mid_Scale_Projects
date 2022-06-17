@@ -2,8 +2,8 @@
 -- Current Database: nation
 --
 
--- CREATE DATABASE nation;
--- USE nation;
+CREATE DATABASE nation;
+USE nation;
 
 -- CREATE DATABASE nation2;
 -- USE nation2;
